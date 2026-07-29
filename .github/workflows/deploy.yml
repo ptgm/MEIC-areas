@@ -32,6 +32,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
@@ -42,10 +43,22 @@ jobs:
         run: |
           python check_meic_enrolments.py
 
+      - name: Prepare static site directory
+        run: |
+          # Create a dedicated directory to prevent exposing scripts and repo metadata
+          mkdir -p public
+          
+          # Copy only static web assets into the deployment directory
+          # Add or remove file extensions here depending on what your site requires
+          find . -maxdepth 1 -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" -o -name "*.json" -o -name "*.png" -o -name "*.jpg" -o -name "*.svg" -o -name "*.ico" \) -exec cp {} public/ \;
+          
+          # If you have existing subdirectories with static assets (e.g., 'assets' or 'static'), uncomment below:
+          # cp -r assets public/ 2>/dev/null || true
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./
+          path: ./public
 
       - name: Deploy to GitHub Pages
         id: deployment
