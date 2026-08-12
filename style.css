@@ -118,24 +118,108 @@ header p {
     flex-shrink: 0;
 }
 
-.search-wrapper {
+.search-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-content: center;
     margin-bottom: 1rem;
-    max-width: 700px;
-    position: relative;
     width: 100%;
+}
+
+.search-wrapper {
+    position: relative;
+    width: min(100%, 350px);
+    flex: 0 1 350px;
 }
 
 #course-search {
     width: 100%;
-    padding: 1rem 3rem 1rem 1.5rem;
-    /* Added right padding for the button */
+    padding: 0.8rem 2.8rem 0.8rem 1rem;
     border: 2px solid var(--border-color);
     border-radius: 9999px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: all 0.2s;
     outline: none;
     background-color: var(--card-bg);
     box-shadow: var(--shadow-sm);
+}
+
+.period-filter-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    flex: 1 1 auto;
+}
+
+.period-filter-tag {
+    appearance: none;
+    border: 1px solid var(--border-color);
+    background: #ffffff;
+    color: var(--text-main);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.period-filter-tag[data-period="P1"] {
+    background: #e7f1d0;
+    border-color: #b9d68a;
+    color: #3a4d1d;
+}
+
+.period-filter-tag[data-period="P2"] {
+    background: #e5e7ff;
+    border-color: #b9c0ff;
+    color: #2e2d70;
+}
+
+.period-filter-tag[data-period="P3"] {
+    background: #fed7aa;
+    border-color: #f7b267;
+    color: #6a3f12;
+}
+
+.period-filter-tag[data-period="P4"] {
+    background: #f7d8e9;
+    border-color: #e5a8c8;
+    color: #6a2d56;
+}
+
+.period-filter-tag:hover {
+    border-color: #cbd5e1;
+    filter: brightness(0.98);
+}
+
+.period-filter-tag.is-active {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    filter: saturate(0.95) brightness(0.98);
+}
+
+.period-filter-tag[data-period="P1"].is-active {
+    background: #dfeeb3;
+    border-color: #9dbb5f;
+}
+
+.period-filter-tag[data-period="P2"].is-active {
+    background: #d9dcff;
+    border-color: #8f9cff;
+}
+
+.period-filter-tag[data-period="P3"].is-active {
+    background: #f7c98c;
+    border-color: #e5952f;
+}
+
+.period-filter-tag[data-period="P4"].is-active {
+    background: #f1bfd9;
+    border-color: #d77aad;
 }
 
 #course-search:focus {
@@ -205,6 +289,33 @@ header p {
     background-color: #fff;
 }
 
+.mandatory-courses {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.mandatory-course-item {
+    opacity: 0.95;
+}
+
+.mandatory-course-item .course-checkbox {
+    cursor: default;
+}
+
+.mandatory-total {
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-align: right;
+}
+
 .course-item {
     background: var(--card-bg);
     padding: 0.5rem 1rem;
@@ -243,9 +354,69 @@ header p {
     min-width: 0;
 }
 
+.course-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
 .course-name {
     font-size: 1rem;
     color: var(--text-main);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.course-ects-inline {
+    color: #6b7280;
+    font-size: 0.72rem;
+    font-weight: 500;
+}
+
+.course-period-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.4rem;
+    padding: 0.12rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+}
+
+.course-period-tag[data-period="P1"] {
+    background: #dfeeb3;
+    color: #3d4f1d;
+}
+
+.course-period-tag[data-period="P2"] {
+    background: #d9dcff;
+    color: #2f2d70;
+}
+
+.course-period-tag[data-period="P3"] {
+    background: #f7c98c;
+    color: #6a3f12;
+}
+
+.course-period-tag[data-period="P4"] {
+    background: #f1bfd9;
+    color: #6a2d56;
+}
+
+.course-period-tag[data-period="P1+P2"] {
+    background: linear-gradient(90deg, #dfeeb3 0%, #d9dcff 100%);
+    color: #2f2d70;
+}
+
+.course-period-tag[data-period="P3+P4"] {
+    background: linear-gradient(90deg, #f7c98c 0%, #f1bfd9 100%);
+    color: #6a3f12;
 }
 
 .course-meta {
