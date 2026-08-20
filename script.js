@@ -447,6 +447,24 @@ function toggleCourse(acronym, checkbox) {
     searchInput.focus();
 }
 
+function getCourseCombinations(courses, size) {
+    const combinations = [];
+
+    function buildCombination(startIndex, combination) {
+        if (combination.length === size) {
+            combinations.push(combination);
+            return;
+        }
+
+        for (let index = startIndex; index <= courses.length - (size - combination.length); index++) {
+            buildCombination(index + 1, [...combination, courses[index]]);
+        }
+    }
+
+    buildCombination(0, []);
+    return combinations;
+}
+
 // Update Results Logic
 function updateResults() {
     selectedCountEl.textContent = `${selectedOptionalCourses.size}`;
@@ -455,8 +473,7 @@ function updateResults() {
     for (const [area, acronyms] of Object.entries(areasData)) {
         const selectedInArea = acronyms.filter(acronym => selectedOptionalCourses.has(acronym));
         if (selectedInArea.length >= 4) {
-            const limitedAreaCourses = selectedInArea.slice(0, 4);
-            completedAreas.push({ name: area, count: limitedAreaCourses.length, courses: limitedAreaCourses });
+            completedAreas.push({ name: area, count: selectedInArea.length, courses: selectedInArea });
         }
     }
 
@@ -480,23 +497,29 @@ function updateResults() {
             const areaA = completedAreas[i];
             const areaB = completedAreas[j];
 
-            const selectedInA = areaA.courses.filter(acronym => selectedOptionalCourses.has(acronym));
-            const selectedInB = areaB.courses.filter(acronym => selectedOptionalCourses.has(acronym));
-            const union = new Set([...selectedInA, ...selectedInB]);
+            const assignmentsA = getCourseCombinations(areaA.courses, 4);
+            const assignmentsB = getCourseCombinations(areaB.courses, 4);
 
-            if (union.size >= 8) {
-                const assignmentA = [...selectedInA].slice(0, 4).sort();
-                const assignmentB = [...selectedInB].slice(0, 4).sort();
-                const acronymsA = assignmentA.join(', ');
-                const acronymsB = assignmentB.join(', ');
-                const key = `${areaA.name}::${areaB.name}`;
-                validCombinations.push({
-                    key,
-                    text: `${areaA.name} (${acronymsA}) + ${areaB.name} (${acronymsB})`,
-                    courseSet: new Set([...assignmentA, ...assignmentB]),
-                    unionSize: union.size,
+            assignmentsA.forEach(assignmentA => {
+                assignmentsB.forEach(assignmentB => {
+                    const courseSet = new Set([...assignmentA, ...assignmentB]);
+                    if (courseSet.size !== 8) {
+                        return;
+                    }
+
+                    const sortedAssignmentA = [...assignmentA].sort();
+                    const sortedAssignmentB = [...assignmentB].sort();
+                    const acronymsA = sortedAssignmentA.join(', ');
+                    const acronymsB = sortedAssignmentB.join(', ');
+                    const key = `${areaA.name}:${acronymsA}::${areaB.name}:${acronymsB}`;
+                    validCombinations.push({
+                        key,
+                        text: `${areaA.name} (${acronymsA}) + ${areaB.name} (${acronymsB})`,
+                        courseSet,
+                        unionSize: courseSet.size,
+                    });
                 });
-            }
+            });
         }
     }
 
