@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import json
+import ast
 import re
 import sys
 from datetime import datetime, timezone
@@ -21,11 +21,21 @@ def read_course_metadata() -> dict[str, dict[str, object]]:
     if not match:
         raise RuntimeError("Could not find course metadata in data.js")
 
-    return json.loads(match.group(1))
+    metadata_as_python = re.sub(
+        r"(?m)^(\s*)([A-Za-z_$][\w$]*)(\s*:)",
+        r'\1"\2"\3',
+        match.group(1),
+    )
+    metadata_as_python = re.sub(
+        r"(?<=:\s)\bnull\b",
+        "None",
+        metadata_as_python,
+    )
+    return ast.literal_eval(metadata_as_python)
 
 
 def get_courses(degree: str) -> dict[str, dict[str, object]]:
-    base_url = f"https://fenix.tecnico.ulisboa.pt/api/fenix/v1/degrees/{degree}/courses?academicTerm=2025/2026"
+    base_url = f"https://fenix.tecnico.ulisboa.pt/api/fenix/v1/degrees/{degree}/courses?academicTerm=2026/2027"
     try:
         response = requests.get(base_url, timeout=30)
         response.raise_for_status()
