@@ -216,7 +216,7 @@ const courseMetadataByAcronym = {
         semester: 1,
         period: 'P1',
         limit: 90,
-        fenixAcronym: 'IAES',
+        fenixAcronym: 'IAES2',
     },
     LN: {
         name: 'Língua Natural',
@@ -321,7 +321,7 @@ const courseMetadataByAcronym = {
         semester: 1,
         period: 'P1+P2',
         limit: null,
-        fenixAcronym: 'PIV3112',
+        fenixAcronym: 'PIV',
     },
     RSIHR: {
         name: 'Robótica Social e Interação Humanos-Robôs',
@@ -349,7 +349,7 @@ const courseMetadataByAcronym = {
         semester: 1,
         period: 'P1',
         limit: 144,
-        fenixAcronym: 'DIIC112',
+        fenixAcronym: 'DIIC',
     },
     AIIC: {
         name: 'Ambientes Inteligentes e Internet das Coisas',
