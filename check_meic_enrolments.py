@@ -120,10 +120,12 @@ if __name__ == "__main__":
         print(f"Warning: {exc}; writing empty enrolment data", file=sys.stderr)
         enrolments = {}
 
-    write_enrolments_file(output_path, enrolments)
-
-    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-    write_last_updated_file(DEFAULT_TIMESTAMP_OUTPUT_PATH, timestamp)
-    print(f"Wrote {output_path} and {DEFAULT_TIMESTAMP_OUTPUT_PATH}")
+    if enrolments:
+        write_enrolments_file(output_path, enrolments)
+        timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+        write_last_updated_file(DEFAULT_TIMESTAMP_OUTPUT_PATH, timestamp)
+        print(f"Wrote {output_path} and {DEFAULT_TIMESTAMP_OUTPUT_PATH}")
+    else:
+        print("Warning: no enrolment data fetched; keeping existing file.", file=sys.stderr)
 
 
