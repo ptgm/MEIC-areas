@@ -159,7 +159,7 @@ const courseMetadataByAcronym = {
         name: 'Visualização de Informação',
         semester: 1,
         period: 'P1',
-        limit: 133,
+        limit: 144,
         fenixAcronym: 'VI',
     },
     AIP: {
@@ -222,7 +222,7 @@ const courseMetadataByAcronym = {
         name: 'Língua Natural',
         semester: 1,
         period: 'P1',
-        limit: 216,
+        limit: 235,
         fenixAcronym: 'LN',
     },
     IPIA: {
@@ -299,7 +299,7 @@ const courseMetadataByAcronym = {
         name: 'Inteligência Artificial para Jogos',
         semester: 1,
         period: 'P1',
-        limit: 52,
+        limit: 63,
         fenixAcronym: 'IAJ',
     },
     MDJ: {
@@ -383,7 +383,7 @@ const courseMetadataByAcronym = {
         name: 'Desenvolvimento de Aplicações Distribuídas',
         semester: 1,
         period: 'P1',
-        limit: 130,
+        limit: 144,
         fenixAcronym: 'PADI',
     },
     AE: {
