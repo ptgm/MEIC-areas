@@ -76,7 +76,7 @@ const courseMetadataByAcronym = {
         semester: 1,
         period: 'P2',
         limit: 216,
-        fenixAcronym: 'ASof',
+        fenixAcronym: 'SSof',
     },
     SIRS: {
         name: 'Segurança Informática em Redes e Sistemas',
