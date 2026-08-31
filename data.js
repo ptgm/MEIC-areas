@@ -82,7 +82,7 @@ const courseMetadataByAcronym = {
         name: 'Segurança Informática em Redes e Sistemas',
         semester: 1,
         period: 'P2',
-        limit: 208,
+        limit: 209,
         fenixAcronym: 'SIRS',
     },
     CPS: {
