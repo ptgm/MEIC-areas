@@ -53,25 +53,43 @@ header p {
 }
 
 .search-section {
-    margin-bottom: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 1.5rem;
+    max-width: 1200px;
+    text-align: center;
+    padding-top: 0.25rem;
+}
+
+.search-section h2 {
+    margin: 0;
+    font-size: clamp(2rem, 2.8vw, 2.7rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
     text-align: center;
 }
 
-.header-links {
+.header-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    margin-top: 0.75rem;
+    align-items: flex-start;
+    gap: 0.2rem;
+    margin-top: 0.4rem;
+    width: 100%;
 }
 
-.header-link-row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+.header-info-line {
+    width: 100%;
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    text-align: left;
+    display: block;
+}
+
+#last-updated {
+    display: inline;
+    width: auto;
+    margin: 0;
 }
 
 .header-link {
@@ -80,7 +98,8 @@ header p {
     gap: 0.4rem;
     color: var(--primary-color);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: inherit;
+    line-height: inherit;
     transition: color 0.2s ease;
 }
 
@@ -89,14 +108,11 @@ header p {
 }
 
 .header-disclaimer {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.85rem;
+    display: inline;
+    font-size: inherit;
+    line-height: inherit;
     color: var(--text-secondary);
-    text-align: center;
-    flex-wrap: wrap;
-    justify-content: center;
+    text-align: left;
 }
 
 .header-disclaimer-icon {
@@ -106,10 +122,7 @@ header p {
 }
 
 .last-updated {
-    margin-top: 0.25rem;
-    font-size: 0.78rem;
-    color: var(--text-secondary);
-    text-align: center;
+    display: none;
 }
 
 .github-link svg {

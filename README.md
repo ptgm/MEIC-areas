@@ -13,7 +13,7 @@ This is a non-official project maintained by [Pedro T. Monteiro](https://github.
 - Visual validation of completed areas and valid area combinations
 - Course webpage links and enrolment/limit information
 - Automatic refresh of enrolment data from Fénix
-- Published to GitHub Pages at https://meic-areas.github.io
+- Published to GitHub Pages at https://ptgm.github.io/MEIC-areas/
 
 ## Project structure
 

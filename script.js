@@ -122,13 +122,57 @@ function courseMatchesSelectedPeriods(periodValue) {
     return false;
 }
 
+function normalizeSearchText(value) {
+    return String(value ?? '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim();
+}
+
+function getCourseSearchScore(metadata, normalizedFilter) {
+    if (!normalizedFilter) {
+        return 0;
+    }
+
+    const acronym = normalizeSearchText(metadata.acronym);
+    if (acronym.includes(normalizedFilter)) {
+        return 2;
+    }
+
+    const name = normalizeSearchText(metadata.name);
+    if (name.includes(normalizedFilter)) {
+        return 1;
+    }
+
+    return 0;
+}
+
 function getFilteredCourses() {
-    const currentFilter = searchInput.value.toLowerCase();
-    return allCourses.filter(course => {
+    const currentFilter = normalizeSearchText(searchInput.value);
+    const filteredCourses = allCourses.filter(course => {
         const metadata = getCourseMetadata(course);
-        const textMatches = !currentFilter || metadata.acronym.toLowerCase().includes(currentFilter) || metadata.name.toLowerCase().includes(currentFilter);
+        const textMatches = !currentFilter || getCourseSearchScore(metadata, currentFilter) > 0;
         const periodMatches = courseMatchesSelectedPeriods(metadata.period);
         return textMatches && periodMatches;
+    });
+
+    if (!currentFilter) {
+        return filteredCourses;
+    }
+
+    return filteredCourses.sort((a, b) => {
+        const metadataA = getCourseMetadata(a);
+        const metadataB = getCourseMetadata(b);
+        const scoreDifference = getCourseSearchScore(metadataB, currentFilter) - getCourseSearchScore(metadataA, currentFilter);
+
+        if (scoreDifference !== 0) {
+            return scoreDifference;
+        }
+
+        const nameA = normalizeSearchText(metadataA.name || metadataA.acronym);
+        const nameB = normalizeSearchText(metadataB.name || metadataB.acronym);
+        return nameA.localeCompare(nameB, 'en', { sensitivity: 'base' });
     });
 }
 
@@ -138,9 +182,9 @@ function updateLastUpdatedText() {
     }
 
     if (window.lastUpdatedTimestamp) {
-        lastUpdatedEl.textContent = `Enrolments last update from Fenix-API at ${window.lastUpdatedTimestamp} (updated every hour)`;
+        lastUpdatedEl.textContent = `(last update from Fenix-API at ${window.lastUpdatedTimestamp})`;
     } else {
-        lastUpdatedEl.textContent = 'Enrolments last update from Fenix-API not available yet.';
+        lastUpdatedEl.textContent = '(last update from Fenix-API not available)';
     }
 }
 
