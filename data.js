@@ -5,7 +5,7 @@ const courseMetadataByAcronym = {
         name: 'Algoritmos para Lógica Computacional',
         semester: 1,
         period: 'P1',
-        limit: 48,
+        limit: 60,
         fenixAcronym: 'ALC',
     },
     CRC: {
