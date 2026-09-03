@@ -222,7 +222,7 @@ const courseMetadataByAcronym = {
         name: 'Língua Natural',
         semester: 1,
         period: 'P1',
-        limit: 235,
+        limit: 237,
         fenixAcronym: 'LN',
     },
     IPIA: {
