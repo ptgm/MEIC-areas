@@ -257,7 +257,7 @@ const courseMetadataByAcronym = {
         name: 'Design de Interação para Realidade Virtual, Aumentada e Mista',
         semester: 1,
         period: 'P2',
-        limit: 72,
+        limit: 60,
         fenixAcronym: 'RVir',
     },
     CV: {
