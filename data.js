@@ -194,7 +194,7 @@ const courseMetadataByAcronym = {
         name: 'Engenharia de Sistemas de Alto Desempenho',
         semester: 1,
         period: 'P1',
-        limit: 56,
+        limit: 66,
         fenixAcronym: 'ESLE',
     },
     ADSI: {
