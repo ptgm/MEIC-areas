@@ -117,7 +117,7 @@ const courseMetadataByAcronym = {
         name: 'Análise e Especificação de Software',
         semester: 1,
         period: 'P1',
-        limit: 60,
+        limit: 62,
         fenixAcronym: 'QS',
     },
     GPI: {
