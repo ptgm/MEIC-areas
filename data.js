@@ -110,14 +110,14 @@ const courseMetadataByAcronym = {
         name: 'Arquitectura de Software',
         semester: 1,
         period: 'P2',
-        limit: 90,
+        limit: 100,
         fenixAcronym: 'ASof',
     },
     AES: {
         name: 'Análise e Especificação de Software',
         semester: 1,
         period: 'P1',
-        limit: 62,
+        limit: 65,
         fenixAcronym: 'QS',
     },
     GPI: {
@@ -180,7 +180,7 @@ const courseMetadataByAcronym = {
         name: 'Plataformas de Suporte a Ia',
         semester: 1,
         period: 'P1',
-        limit: 166,
+        limit: 167,
         fenixAcronym: 'AGI',
     },
     DDRS: {
